@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 // material-ui
 import {
   Box,
@@ -23,23 +26,56 @@ const style = {
   },
 };
 
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(4).max(100).required(),
+});
+
 const Login: React.FC<any> = ({ sx }) => {
-  const handleLogin = (event: any) => {
-    event.preventDefault();
-    console.log(event.target);
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const login: SubmitHandler<{
+    email: string;
+    password: string;
+  }> = async (values) => {
+    await console.log(values);
+    reset();
   };
+
   return (
     <Card sx={style.card} variant="outlined">
       <CardContent>
         <h1>Login</h1>
 
-        <TextField fullWidth label="username" id="username" margin="normal" />
+        <TextField
+          {...register("email")}
+          name="email"
+          fullWidth
+          label="email"
+          id="email"
+          margin="normal"
+          helperText={errors?.email?.message}
+        />
         <TextField
           fullWidth
           label="password"
           id="password"
           margin="normal"
           type="password"
+          {...register("password")}
+          helperText={errors?.password?.message}
         />
       </CardContent>
 
@@ -47,7 +83,7 @@ const Login: React.FC<any> = ({ sx }) => {
         <Button
           variant="contained"
           startIcon={<LoginIcon />}
-          onClick={handleLogin}
+          onClick={handleSubmit(login)}
         >
           Login
         </Button>
