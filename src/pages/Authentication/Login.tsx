@@ -1,22 +1,15 @@
-import { Link } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // material-ui
 import {
-  Box,
   Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
-  Grid,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import { useState } from "react";
 
 const style = {
   card: {
@@ -34,7 +27,6 @@ const schema = yup.object().shape({
 
 const Login: React.FC<any> = ({ sx }) => {
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -89,7 +81,7 @@ const Login: React.FC<any> = ({ sx }) => {
         >
           Login
         </Button>
-        <Button size="small">Register</Button>
+        <Button size="small">Forgot password ?</Button>
       </CardActions>
     </Card>
   );
