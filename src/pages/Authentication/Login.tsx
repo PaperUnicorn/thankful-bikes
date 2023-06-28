@@ -23,6 +23,7 @@ const style = {
     height: "40rem",
     width: "40rem",
     padding: "1rem",
+    borderRadius: "10px",
   },
 };
 
@@ -81,6 +82,7 @@ const Login: React.FC<any> = ({ sx }) => {
 
       <CardActions>
         <Button
+          sx={{ borderRadius: "10px" }}
           variant="contained"
           startIcon={<LoginIcon />}
           onClick={handleSubmit(login)}
