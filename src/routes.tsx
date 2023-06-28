@@ -4,6 +4,7 @@ import MainLayout from "./layout/MainLayout";
 import { Suspense, lazy } from "react";
 import LoadingScreen from "./components/LoadingScreen";
 import NotFoundScreen from "./components/errors/NotFoundScreen";
+import LoginLayout from "./layout/LoginLayout";
 
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
@@ -14,7 +15,7 @@ const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   );
 
 // *  AUTHENTICATION PAGES
-const Login = Loadable(lazy(() => import('./pages/Login')));
+const Login = Loadable(lazy(() => import('./pages/Authentication/Login')));
 // const Register = Loadable(
 //   lazy(() => import('./pages/authentication/Register'))
 // );
@@ -32,7 +33,7 @@ const routes: RouteObject[] = [
         },
         {   
             path: 'login',
-            element: <Login />,
+            element: <LoginLayout />,
         },
         // {
         //   path: 'register',
