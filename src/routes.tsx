@@ -5,6 +5,9 @@ import LoadingScreen from "./components/LoadingScreen";
 import NotFoundScreen from "./components/errors/NotFoundScreen";
 import LoginLayout from "./layout/LoginLayout";
 import MainLayout from "./layout/MainLayout";
+import Summary from "./pages/Dashboard/Summary";
+import Stores from "./pages/Dashboard/Stores";
+import Users from "./pages/Dashboard/Users";
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -36,6 +39,20 @@ const routes: RouteObject[] = [
       {
         path: "dashboard",
         element: <MainLayout />,
+        children: [
+          {
+            path: "summary",
+            element: <Summary />,
+          },
+          {
+            path: "stores",
+            element: <Stores />,
+          },
+          {
+            path: "users",
+            element: <Users />,
+          },
+        ],
       },
       // {
       //   path: 'register',

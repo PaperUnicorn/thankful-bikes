@@ -12,11 +12,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const list = () => (
   <List>
     <ListItem key={"Stores"} disablePadding>
-      <ListItemButton>
+      <ListItemButton component={Link} to={"stores"}>
         <ListItemIcon>
           <StoreIcon sx={{ color: "whitesmoke" }} />
         </ListItemIcon>
@@ -24,7 +25,7 @@ const list = () => (
       </ListItemButton>
     </ListItem>
     <ListItem key={"Users"} disablePadding>
-      <ListItemButton>
+      <ListItemButton component={Link} to={"users"}>
         <ListItemIcon>
           <PersonIcon sx={{ color: "whitesmoke" }} />
         </ListItemIcon>
@@ -51,7 +52,7 @@ const ToolDrawer: React.FC<{ open: boolean; setOpen: Function }> = ({
   return (
     <Drawer
       sx={{
-        width: 250,
+        width: 240,
         flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: 240,
