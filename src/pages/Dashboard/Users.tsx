@@ -1,5 +1,5 @@
 const Users: React.FC<any> = ({ sx }) => {
-  return <h1>Users</h1>;
+  return <p>users</p>;
 };
 
 export default Users;

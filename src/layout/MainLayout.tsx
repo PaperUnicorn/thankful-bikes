@@ -54,7 +54,15 @@ const MainLayout: React.FC<any> = ({ sx }) => {
 
       <Main open={openDrawer}>
         <DrawerHeader />
-        <Outlet />
+        <Paper
+          sx={{
+            background: "lightslategrey",
+            width: "100%",
+            padding: "1rem",
+          }}
+        >
+          <Outlet />
+        </Paper>
       </Main>
     </Box>
   );
