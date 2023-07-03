@@ -12,6 +12,7 @@ import {
   styled,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 
 const drawerWidth = 240;
@@ -110,28 +111,39 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
           </Stack>
           <Box>
             <Box alignContent={"right"}>
-              <Button
-                id="basic-button"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <Avatar {...stringAvatar("Chinmay Kalegaonkar")} />
-              </Button>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
+              <Stack alignItems="center" direction="row">
+                <Avatar variant="rounded">
+                  <NotificationsIcon />
+                </Avatar>
+
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <Avatar {...stringAvatar("Chinmay Kalegaonkar")} />
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
+              </Stack>
             </Box>
           </Box>
         </Box>
