@@ -2,8 +2,10 @@ import * as React from "react";
 import {
   Avatar,
   Box,
+  Breadcrumbs,
   Button,
   IconButton,
+  Link,
   Menu,
   MenuItem,
   Stack,
@@ -14,6 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { useLocation } from "react-router";
 
 const drawerWidth = 240;
 
@@ -73,6 +76,9 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
   openDrawer,
   setOpenDrawer,
 }) => {
+  const location = useLocation();
+  const pathnames = location.pathname.split("/");
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -105,9 +111,20 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Dashboard
-            </Typography>
+
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link underline="hover" color="inherit" href="/">
+                Dashboard
+              </Link>
+
+              <Link
+                underline="hover"
+                color="inherit"
+                href={pathnames[pathnames.length - 1]}
+              >
+                {pathnames[pathnames.length - 1]}
+              </Link>
+            </Breadcrumbs>
           </Stack>
           <Box>
             <Box alignContent={"right"}>
