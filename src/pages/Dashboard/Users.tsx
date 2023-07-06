@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -6,11 +7,15 @@ import {
   Checkbox,
   Container,
   Grid,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
 
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 170 },
@@ -63,29 +68,42 @@ const SummaryCard = () => {
 const Users: React.FC<any> = ({ sx }) => {
   return (
     <>
-      <Typography color="text.tertiary" gutterBottom>
-        users
-      </Typography>
-      <Stack direction="row" spacing={8}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography variant="h6" color="text.tertiary" gutterBottom>
+          USERS
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <ModeEditIcon />
+          <AddCircleIcon />
+        </Stack>
+      </Box>
+      {/* <Stack direction="row" spacing={8}>
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />
-      </Stack>
+      </Stack> */}
       <Container maxWidth={false} sx={{ margin: "2rem 0rem" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          sx={{ color: "white", width: "100%" }}
-        />
+        <Paper elevation={3}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            pageSizeOptions={[10]}
+            checkboxSelection
+            sx={{ width: "100%", height: "120%" }}
+          />
+        </Paper>
       </Container>
     </>
   );

@@ -59,7 +59,7 @@ const MainLayout: React.FC<any> = ({ sx }) => {
             background: "#1b2a39",
             color: "white",
             width: "100%",
-            height: "880px",
+            minHeight: "880px",
             padding: "1rem",
             boxShadow: 10,
           }}
