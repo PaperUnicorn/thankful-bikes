@@ -4,6 +4,8 @@ import {
   Box,
   Breadcrumbs,
   Button,
+  Card,
+  CardHeader,
   IconButton,
   Link,
   Menu,
@@ -17,6 +19,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import { useLocation } from "react-router";
+import NotificationCard from "../../components/card/NotificationCard";
+import { red } from "@mui/material/colors";
+import { title } from "process";
 
 const drawerWidth = 240;
 
@@ -87,6 +92,18 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const [notifAnchorEl, setNotifAnchorEl] = React.useState<null | HTMLElement>(
+    null
+  );
+  const notifOpen = Boolean(notifAnchorEl);
+  const handleNotifClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setNotifAnchorEl(event.currentTarget);
+  };
+  const handleNotifClose = () => {
+    setNotifAnchorEl(null);
+  };
+
   return (
     <AppBar position="fixed" open={openDrawer}>
       <Toolbar>
@@ -129,13 +146,50 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
           <Box>
             <Box alignContent={"right"}>
               <Stack alignItems="center" direction="row">
-                <Avatar variant="rounded">
-                  <NotificationsIcon />
-                </Avatar>
+                <Button
+                  id="notif-button"
+                  aria-controls={notifOpen ? "notif-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={notifOpen ? "true" : undefined}
+                  onClick={handleNotifClick}
+                >
+                  <Avatar variant="rounded">
+                    <NotificationsIcon />
+                  </Avatar>
+                </Button>
+
+                <Menu
+                  id="notif-menu"
+                  anchorEl={notifAnchorEl}
+                  open={notifOpen}
+                  onClose={handleNotifClose}
+                  MenuListProps={{
+                    "aria-labelledby": "notif-button",
+                  }}
+                >
+                  <NotificationCard
+                    onClick={handleNotifClose}
+                    title={"Notification"}
+                    subtitle={"youve got mail"}
+                  />
+                  <NotificationCard
+                    onClick={handleNotifClose}
+                    title={"Notification"}
+                    subtitle={"youve got mail"}
+                  />
+                  <NotificationCard
+                    onClick={handleNotifClose}
+                    title={"Notification"}
+                    subtitle={"youve got mail"}
+                  />
+                  <Card sx={{ minWidth: "2rem" }}>
+                    <CardHeader title={"see all"} />
+                  </Card>
+                </Menu>
 
                 <Button
-                  id="basic-button"
-                  aria-controls={open ? "basic-menu" : undefined}
+                  id="profile-button"
+                  aria-controls={open ? "profile-menu" : undefined}
                   aria-haspopup="true"
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
@@ -143,21 +197,16 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
                   <Avatar {...stringAvatar("Chinmay Kalegaonkar")} />
                 </Button>
                 <Menu
-                  id="basic-menu"
+                  id="profile-menu"
                   anchorEl={anchorEl}
                   open={open}
                   onClose={handleClose}
                   MenuListProps={{
-                    "aria-labelledby": "basic-button",
+                    "aria-labelledby": "profile-button",
                   }}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               </Stack>

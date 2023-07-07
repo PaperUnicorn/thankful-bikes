@@ -16,6 +16,8 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
+import ShareIcon from "@mui/icons-material/Share";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 170 },
@@ -78,6 +80,8 @@ const Users: React.FC<any> = ({ sx }) => {
           USERS
         </Typography>
         <Stack direction="row" spacing={2}>
+          <ShareIcon />
+          <FileDownloadIcon />
           <ModeEditIcon />
           <AddCircleIcon />
         </Stack>

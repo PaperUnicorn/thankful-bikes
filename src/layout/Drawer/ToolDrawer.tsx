@@ -1,8 +1,5 @@
 import { styled, useTheme } from "@mui/material/styles";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import StoreIcon from "@mui/icons-material/Store";
-import PersonIcon from "@mui/icons-material/Person";
-import LayersIcon from "@mui/icons-material/Layers";
 import {
   Divider,
   Drawer,
@@ -14,24 +11,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
-const menuItems = [
-  {
-    text: "Stores",
-    link: "stores",
-    icon: <StoreIcon sx={{ color: "whitesmoke" }} />,
-  },
-  {
-    text: "Users",
-    link: "users",
-    icon: <PersonIcon sx={{ color: "whitesmoke" }} />,
-  },
-  {
-    text: "Permissions",
-    link: "permissions",
-    icon: <LayersIcon sx={{ color: "whitesmoke" }} />,
-  },
-];
+import { menuItems } from "./DrawerItems";
 
 const list = () => (
   <List>
@@ -45,22 +25,6 @@ const list = () => (
         </ListItem>
       );
     })}
-    {/* <ListItem key={"Stores"} disablePadding>
-      <ListItemButton component={Link} to={"stores"}>
-        <ListItemIcon>
-          <StoreIcon sx={{ color: "whitesmoke" }} />
-        </ListItemIcon>
-        <ListItemText primary={"Stores"} />
-      </ListItemButton>
-    </ListItem>
-    <ListItem key={"Users"} disablePadding>
-      <ListItemButton component={Link} to={"users"}>
-        <ListItemIcon>
-          <PersonIcon sx={{ color: "whitesmoke" }} />
-        </ListItemIcon>
-        <ListItemText primary={"Users"} />
-      </ListItemButton>
-    </ListItem> */}
   </List>
 );
 
