@@ -86,13 +86,13 @@ const Users: React.FC<any> = ({ sx }) => {
           <AddCircleIcon />
         </Stack>
       </Box>
-      {/* <Stack direction="row" spacing={8}>
+      <Stack direction="row" spacing={8}>
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />
         <SummaryCard />
-        <SummaryCard />
-      </Stack> */}
+        {/* <SummaryCard /> */}
+      </Stack>
       <Container maxWidth={false} sx={{ margin: "2rem 0rem" }}>
         <Paper elevation={3}>
           <DataGrid

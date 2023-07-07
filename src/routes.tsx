@@ -8,6 +8,7 @@ import MainLayout from "./layout/MainLayout";
 import Summary from "./pages/Dashboard/Summary";
 import Stores from "./pages/Dashboard/Stores";
 import Users from "./pages/Dashboard/Users";
+import Permissions from "./pages/Dashboard/Permissions";
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -51,6 +52,10 @@ const routes: RouteObject[] = [
           {
             path: "users",
             element: <Users />,
+          },
+          {
+            path: "permissions",
+            element: <Permissions />,
           },
         ],
       },

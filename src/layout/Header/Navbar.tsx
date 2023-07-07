@@ -22,6 +22,7 @@ import { useLocation } from "react-router";
 import NotificationCard from "../../components/card/NotificationCard";
 import { red } from "@mui/material/colors";
 import { title } from "process";
+import { menuItems } from "../Drawer/DrawerItems";
 
 const drawerWidth = 240;
 
@@ -139,7 +140,13 @@ const NavBar: React.FC<{ openDrawer: boolean; setOpenDrawer: Function }> = ({
                 color="inherit"
                 href={pathnames[pathnames.length - 1]}
               >
-                {pathnames[pathnames.length - 1]}
+                {
+                  menuItems.find(
+                    (e) =>
+                      e.text.toUpperCase() ===
+                      pathnames[pathnames.length - 1].toUpperCase()
+                  )?.text
+                }
               </Link>
             </Breadcrumbs>
           </Stack>
