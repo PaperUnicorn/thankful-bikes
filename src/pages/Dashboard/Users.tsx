@@ -14,84 +14,51 @@ import {
 
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import ShareIcon from "@mui/icons-material/Share";
+import SummaryCard from "../../components/card/SummaryCard";
+import SimpleActionBar from "../../components/actionbar/SimpleActionBar";
+import { useState } from "react";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 170 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
+  { field: "username", headerName: "User name", width: 130 },
+  { field: "email", headerName: "Email", width: 130 },
   {
-    field: "age",
-    headerName: "Age",
-    type: "number",
+    field: "role",
+    headerName: "Role",
     width: 90,
   },
   {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
+    field: "store",
+    headerName: "Store",
     width: 160,
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
 ];
 
 const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, username: "Snow", email: "Jon", role: "manager" },
+  { id: 2, username: "Lannister", email: "Cersei", role: "cashier" },
+  { id: 3, username: "Lannister", email: "Jaime", role: "BDE" },
+  { id: 4, username: "Stark", email: "Arya", role: "BDE" },
+  { id: 5, username: "Targaryen", email: "Daenerys", role: "cashier" },
+  { id: 6, username: "Melisandre", email: null, role: "BDE" },
+  { id: 7, username: "Clifford", email: "Ferrara", role: "BDE" },
+  { id: 8, username: "Frances", email: "Rossini", role: "BDE" },
+  { id: 9, username: "Roxie", email: "Harvey", role: "cashier" },
 ];
 
-const SummaryCard = () => {
-  return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Total
-        </Typography>
-        <Typography variant="h5" component="div">
-          14
-        </Typography>
-      </CardContent>
-    </Card>
-  );
+const handleShare = () => {
+  console.log(`clicked`);
 };
 
 const Users: React.FC<any> = ({ sx }) => {
+  const [selectedRows, setSelectedRows] = useState([]:);
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography variant="h6" color="text.tertiary" gutterBottom>
-          USERS
-        </Typography>
-        <Stack direction="row" spacing={2}>
-          <ShareIcon />
-          <FileDownloadIcon />
-          <ModeEditIcon />
-          <AddCircleIcon />
-        </Stack>
-      </Box>
+      <SimpleActionBar title="USERS" handleShare={handleShare} />
       <Stack direction="row" spacing={8}>
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        <SummaryCard />
-        {/* <SummaryCard /> */}
+        <SummaryCard heading="Total users" count="14" />
+        <SummaryCard heading="Active users" count="10" />
+        <SummaryCard heading="Inactive users" count="4" />
       </Stack>
       <Container maxWidth={false} sx={{ margin: "2rem 0rem" }}>
         <Paper elevation={3}>
@@ -106,6 +73,12 @@ const Users: React.FC<any> = ({ sx }) => {
             pageSizeOptions={[10]}
             checkboxSelection
             sx={{ width: "100%", height: "120%" }}
+            onRowSelectionModelChange={(ids) => {
+              const selectedRowsData = ids.map((id) =>
+                rows.find((row) => row.id === id)
+              );
+              setSelectedRows(selectedRowsData)
+            }}
           />
         </Paper>
       </Container>
