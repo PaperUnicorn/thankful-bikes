@@ -1,22 +1,10 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Checkbox,
-  Container,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Container, Stack } from "@mui/material";
 
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 
 import SummaryCard from "../../components/card/SummaryCard";
 import SimpleActionBar from "../../components/actionbar/SimpleActionBar";
-import { useState } from "react";
+import MainTable from "../../components/table/MainTable";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 170 },
@@ -50,8 +38,7 @@ const handleShare = () => {
   console.log(`clicked`);
 };
 
-const Users: React.FC<any> = ({ sx }) => {
-  const [selectedRows, setSelectedRows] = useState([]:);
+const Users: React.FC<any> = () => {
   return (
     <>
       <SimpleActionBar title="USERS" handleShare={handleShare} />
@@ -61,26 +48,7 @@ const Users: React.FC<any> = ({ sx }) => {
         <SummaryCard heading="Inactive users" count="4" />
       </Stack>
       <Container maxWidth={false} sx={{ margin: "2rem 0rem" }}>
-        <Paper elevation={3}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
-            pageSizeOptions={[10]}
-            checkboxSelection
-            sx={{ width: "100%", height: "120%" }}
-            onRowSelectionModelChange={(ids) => {
-              const selectedRowsData = ids.map((id) =>
-                rows.find((row) => row.id === id)
-              );
-              setSelectedRows(selectedRowsData)
-            }}
-          />
-        </Paper>
+        <MainTable rows={rows} columns={columns} />
       </Container>
     </>
   );

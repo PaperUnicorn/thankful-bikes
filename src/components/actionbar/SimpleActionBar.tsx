@@ -4,11 +4,10 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import ShareIcon from "@mui/icons-material/Share";
-import SummaryCard from "../../components/card/SummaryCard";
 
 const SimpleActionBar: React.FC<{
   title: string;
-  handleShare: Function;
+  handleShare?: Function;
   handleDownload?: Function;
   handleEdit?: Function;
   handleAdd?: Function;
@@ -24,10 +23,27 @@ const SimpleActionBar: React.FC<{
         {title}
       </Typography>
       <Stack direction="row" spacing={2}>
-        <ShareIcon onClick={() => handleShare()} />
-        <FileDownloadIcon />
-        <ModeEditIcon />
-        <AddCircleIcon />
+        <ShareIcon
+          onClick={() => {
+            handleShare && handleShare();
+          }}
+        />
+
+        <FileDownloadIcon
+          onClick={() => {
+            handleDownload && handleDownload();
+          }}
+        />
+        <ModeEditIcon
+          onClick={() => {
+            handleEdit && handleEdit();
+          }}
+        />
+        <AddCircleIcon
+          onClick={() => {
+            handleAdd && handleAdd();
+          }}
+        />
       </Stack>
     </Box>
   );
