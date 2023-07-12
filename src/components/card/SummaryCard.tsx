@@ -2,7 +2,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 
 const SummaryCard: React.FC<{
   heading: string;
-  count: string;
+  count?: string;
   subtitle?: string;
 }> = ({ heading, count, subtitle }) => {
   return (
@@ -13,6 +13,9 @@ const SummaryCard: React.FC<{
         </Typography>
         <Typography variant="h5" component="div">
           {count}
+        </Typography>
+        <Typography variant="subtitle1" component="div">
+          {subtitle}
         </Typography>
       </CardContent>
     </Card>

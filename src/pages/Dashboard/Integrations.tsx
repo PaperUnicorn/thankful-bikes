@@ -3,15 +3,13 @@ import SimpleActionBar from "../../components/actionbar/SimpleActionBar";
 import SummaryCard from "../../components/card/SummaryCard";
 import MainTable from "../../components/table/MainTable";
 
-const Permissions: React.FC<any> = ({ sx }) => {
+const Integrations: React.FC<any> = ({ sx }) => {
   return (
     <>
-      <SimpleActionBar title="Permissions" handleShare={undefined} />
-      <Stack direction="row" spacing={8}>
-        <SummaryCard heading="Total users" count="14" />
-        <SummaryCard heading="Active users" count="10" />
-        <SummaryCard heading="Inactive users" count="4" />
-      </Stack>
+      <SimpleActionBar title="Integrations" handleShare={undefined} />
+      {/* <Stack direction="row" spacing={8}>
+        <SummaryCard heading="This Campaign growth" subtitle="14%" />
+      </Stack> */}
       <Container maxWidth={false} sx={{ margin: "2rem 0rem" }}>
         <MainTable rows={[]} columns={[]} />
       </Container>
@@ -19,4 +17,4 @@ const Permissions: React.FC<any> = ({ sx }) => {
   );
 };
 
-export default Permissions;
+export default Integrations;

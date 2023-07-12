@@ -9,6 +9,12 @@ import Summary from "./pages/Dashboard/Summary";
 import Stores from "./pages/Dashboard/Stores";
 import Users from "./pages/Dashboard/Users";
 import Permissions from "./pages/Dashboard/Permissions";
+import Billing from "./pages/Dashboard/Billing";
+import Programs from "./pages/Dashboard/Programs";
+import Campaigns from "./pages/Dashboard/Campaigns";
+import Analytics from "./pages/Dashboard/Analytics";
+import Tools from "./pages/Dashboard/Tools";
+import Integrations from "./pages/Dashboard/Integrations";
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -56,6 +62,30 @@ const routes: RouteObject[] = [
           {
             path: "permissions",
             element: <Permissions />,
+          },
+          {
+            path: "billing",
+            element: <Billing />,
+          },
+          {
+            path: "programs",
+            element: <Programs />,
+          },
+          {
+            path: "campaigns",
+            element: <Campaigns />,
+          },
+          {
+            path: "analytics",
+            element: <Analytics />,
+          },
+          {
+            path: "tools",
+            element: <Tools />,
+          },
+          {
+            path: "Integrations",
+            element: <Integrations />,
           },
         ],
       },

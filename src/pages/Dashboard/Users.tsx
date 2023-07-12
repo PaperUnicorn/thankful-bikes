@@ -41,7 +41,7 @@ const handleShare = () => {
 const Users: React.FC<any> = () => {
   return (
     <>
-      <SimpleActionBar title="USERS" handleShare={handleShare} />
+      <SimpleActionBar title="Users" handleShare={handleShare} />
       <Stack direction="row" spacing={8}>
         <SummaryCard heading="Total users" count="14" />
         <SummaryCard heading="Active users" count="10" />
