@@ -4,12 +4,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // material-ui
 import {
+  Alert,
   Button,
   Card,
   CardActions,
   CardContent,
+  Snackbar,
   TextField,
 } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
 
 const style = {
   card: {
@@ -21,11 +25,12 @@ const style = {
 };
 
 const schema = yup.object().shape({
-  email: yup.string().email().required(),
+  username: yup.string().min(4).max(100).required(),
   password: yup.string().min(4).max(100).required(),
 });
 
 const Login: React.FC<any> = ({ sx }) => {
+  const [apiError, setApiError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -34,56 +39,84 @@ const Login: React.FC<any> = ({ sx }) => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
 
   const login: SubmitHandler<{
-    email: string;
+    username: string;
     password: string;
   }> = async (values) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8090/clp/v1/auth/login",
+        values
+      );
+      console.log(response);
+    } catch (err) {
+      setApiError(true);
+      console.log(err);
+    }
     await console.log(values);
     reset();
   };
 
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setApiError(false);
+  };
+
   return (
-    <Card sx={style.card} variant="outlined">
-      <CardContent>
-        <h1>Login</h1>
+    <>
+      <Card sx={style.card} variant="outlined">
+        <CardContent>
+          <h1>Login</h1>
 
-        <TextField
-          {...register("email")}
-          name="email"
-          fullWidth
-          label="email"
-          id="email"
-          margin="normal"
-          helperText={errors?.email?.message}
-        />
-        <TextField
-          fullWidth
-          label="password"
-          id="password"
-          margin="normal"
-          type="password"
-          {...register("password")}
-          helperText={errors?.password?.message}
-        />
-      </CardContent>
+          <TextField
+            {...register("username")}
+            name="username"
+            fullWidth
+            label="username"
+            id="username"
+            margin="normal"
+            helperText={errors?.username?.message}
+          />
+          <TextField
+            fullWidth
+            label="password"
+            id="password"
+            margin="normal"
+            type="password"
+            {...register("password")}
+            helperText={errors?.password?.message}
+          />
+        </CardContent>
 
-      <CardActions>
-        <Button
-          sx={{ borderRadius: "10px" }}
-          variant="contained"
-          startIcon={<LoginIcon />}
-          onClick={handleSubmit(login)}
-        >
-          Login
-        </Button>
-        <Button size="small">Forgot password ?</Button>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Button
+            sx={{ borderRadius: "10px" }}
+            variant="contained"
+            startIcon={<LoginIcon />}
+            onClick={handleSubmit(login)}
+          >
+            Login
+          </Button>
+          <Button size="small">Forgot password ?</Button>
+        </CardActions>
+      </Card>
+      <Snackbar open={apiError} autoHideDuration={6000} onClose={handleClose}>
+        <Alert severity="error" sx={{ width: "100%" }}>
+          Invalid Credentials
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
