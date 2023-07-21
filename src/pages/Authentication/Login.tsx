@@ -53,6 +53,7 @@ const Login: React.FC<any> = ({ sx }) => {
         "http://localhost:8090/clp/v1/auth/login",
         values
       );
+      localStorage.setItem("auth", response.data.access_token);
       console.log(response);
     } catch (err) {
       setApiError(true);
