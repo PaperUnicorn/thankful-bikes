@@ -1,4 +1,4 @@
-import { RouteObject } from "react-router-dom";
+import { RouteObject, redirect } from "react-router-dom";
 
 import { Suspense, lazy } from "react";
 import LoadingScreen from "./components/LoadingScreen";
@@ -15,6 +15,7 @@ import Campaigns from "./pages/Dashboard/Campaigns";
 import Analytics from "./pages/Dashboard/Analytics";
 import Tools from "./pages/Dashboard/Tools";
 import Integrations from "./pages/Dashboard/Integrations";
+import PrivateRoute from "./components/auth/PrivateRoute";
 
 const Loadable = (Component: any) => (props: JSX.IntrinsicAttributes) =>
   (
@@ -45,11 +46,14 @@ const routes: RouteObject[] = [
       },
       {
         path: "dashboard",
-        element: <MainLayout />,
+        element: (
+          <PrivateRoute>
+            <MainLayout />
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "summary",
-            element: <Summary />,
           },
           {
             path: "stores",
@@ -98,7 +102,6 @@ const routes: RouteObject[] = [
 
   {
     path: "*",
-
     element: <NotFoundScreen />,
   },
 ];

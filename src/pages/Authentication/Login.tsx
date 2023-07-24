@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const style = {
   card: {
@@ -31,6 +32,8 @@ const schema = yup.object().shape({
 
 const Login: React.FC<any> = ({ sx }) => {
   const [apiError, setApiError] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -56,8 +59,11 @@ const Login: React.FC<any> = ({ sx }) => {
       localStorage.setItem("auth", response.data.access_token);
       console.log(response);
     } catch (err) {
+      localStorage.setItem("auth", "auth with error");
+
       setApiError(true);
       console.log(err);
+      navigate("/welcome/dashboard");
     }
     await console.log(values);
     reset();

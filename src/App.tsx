@@ -4,11 +4,13 @@ import "./App.css";
 import { useRoutes } from "react-router-dom";
 import routes from "./routes";
 import { useAppSelector, useAppDispatch } from "./hooks";
+import AuthProvider from "./components/auth/AuthProvider";
+import { Provider } from "react-redux";
+import { createStore } from "@reduxjs/toolkit";
 
 function App() {
-  const { isLoggedIn } = useAppSelector((state) => state.auth);
   const content = useRoutes(routes);
-  return content;
+  return <AuthProvider>{content}</AuthProvider>;
 }
 
 export default App;
