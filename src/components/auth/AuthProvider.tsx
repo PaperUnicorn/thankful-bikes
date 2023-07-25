@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import {
-  Routes,
-  Route,
-  NavLink,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 
 const AuthProvider: React.FC<any> = ({ children }) => {
+  const count = useAppSelector((state) => state.userDetails.id);
+  const dispatch = useAppDispatch();
   const AuthContext = React.createContext(null);
   const navigate = useNavigate();
   const location = useLocation();
