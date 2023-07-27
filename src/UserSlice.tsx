@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { access } from "fs";
 
 interface UserDetailsState {
   username: string | null;
@@ -20,9 +21,12 @@ export const UserDetail = createSlice({
     setUser: (state, action: PayloadAction<UserDetailsState>) => {
       state = action.payload;
     },
+    setUserToken: (state, action: PayloadAction<any>) => {
+      state.token = action.payload;
+    },
   },
 });
 
-export const { logout, setUser } = UserDetail.actions;
+export const { logout, setUser, setUserToken } = UserDetail.actions;
 
 export default UserDetail.reducer;

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 
 function App() {
   const content = useRoutes(routes);
-  return <AuthProvider>{content}</AuthProvider>;
+  return content;
 }
 
 export default App;

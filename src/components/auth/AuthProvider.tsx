@@ -3,11 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { logout, setUser } from "../../UserSlice";
 
-interface IAuthContext {
-  token: string;
-  onLogin: (token: string) => void;
-  onLogout: () => void;
-}
+export const AuthContext = React.createContext(null);
 
 const AuthProvider: React.FC<any> = ({ children }) => {
   const user = useAppSelector((state) => state.userDetails);
@@ -27,11 +23,12 @@ const AuthProvider: React.FC<any> = ({ children }) => {
   };
 
   const value: any = {
+    AuthContext,
     token,
     onLogin: handleLogin,
     onLogout: handleLogout,
   };
-  export const AuthContext = React.createContext<IAuthContext>(value);
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

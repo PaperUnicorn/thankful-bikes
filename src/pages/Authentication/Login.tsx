@@ -17,6 +17,8 @@ import { useContext, useState } from "react";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 import React from "react";
 import AuthProvider, { AuthContext } from "../../components/auth/AuthProvider";
+import { useAppDispatch } from "../../hooks";
+import { setUser, setUserToken } from "../../UserSlice";
 
 const style = {
   card: {
@@ -34,8 +36,8 @@ const schema = yup.object().shape({
 
 const Login: React.FC<any> = ({ sx }) => {
   const [apiError, setApiError] = useState(false);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { onLogin, onLogout } = useContext(AuthContext);
 
   const {
     register,
@@ -59,14 +61,12 @@ const Login: React.FC<any> = ({ sx }) => {
         "http://localhost:8090/clp/v1/auth/login",
         values
       );
-    } catch (err) {
-      localStorage.setItem("auth", "auth with error");
-
-      setApiError(true);
-      console.log(err);
+      console.log(`response`, response);
+      dispatch(setUserToken(response.data.access_token));
       navigate("/welcome/dashboard");
+    } catch (err) {
+      setApiError(true);
     }
-    await console.log(values);
     reset();
   };
 
